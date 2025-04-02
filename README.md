@@ -136,3 +136,16 @@ Free to use, modify, and share. Just don’t publish your own API tokens 😉
 
 Pull requests and issues are welcome!  
 If you find this useful, drop a star ⭐ or share it with other homelabbers!
+
+---
+
+## ☕ Support My Work
+
+If this tool saved you time or effort, consider buying me a coffee.  
+Your support helps me keep building and maintaining open-source projects like this!
+
+You can either scan the QR code below or click the link to tip me:
+
+👉 [**buymeacoffee.com/ashfaqueali**](https://buymeacoffee.com/ashfaqueali)
+
+<img src="https://ashfaqsolangi.com/images/bmc_qr.png" alt="Buy Me a Coffee QR" width="220" height="220" />
