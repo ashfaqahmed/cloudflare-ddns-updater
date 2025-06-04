@@ -53,26 +53,27 @@ def get_all_zones():
 
     return zones
 
-def get_record_id(zone_id, full_record_name):
+def get_record(zone_id, full_record_name):
     response = requests.get(
         f'https://api.cloudflare.com/client/v4/zones/{zone_id}/dns_records?type=A&name={full_record_name}',
         headers=HEADERS
     )
     result = response.json()
     if result['success'] and result['result']:
-        return result['result'][0]['id'], result['result'][0]['content']
-    return None, None
+        return result['result'][0]
+    return {}
 
 def update_or_create_record(zone_id, full_record_name, ip):
-    record_id, current_ip = get_record_id(zone_id, full_record_name)
+    record = get_record(zone_id, full_record_name)
 
-    if record_id is None:
+    if not record:
         if CREATE_IF_MISSING:
             print(f"➕ Creating new A record for {full_record_name}")
         else:
             print(f"⚠️  Record for {full_record_name} does not exist. Skipping (CREATE_IF_MISSING = False).")
             return
 
+    current_ip = record["content"]
     if current_ip == ip:
         print(f"✔ No update needed for {full_record_name}, IP unchanged.")
         return
@@ -81,12 +82,12 @@ def update_or_create_record(zone_id, full_record_name, ip):
         "type": "A",
         "name": full_record_name,
         "content": ip,
-        "ttl": 1,
-        "proxied": True
+        "ttl": record.get("ttl", 1),
+        "proxied": record.get("proxied", True),
     }
 
-    if record_id:
-        url = f'https://api.cloudflare.com/client/v4/zones/{zone_id}/dns_records/{record_id}'
+    if record:
+        url = f'https://api.cloudflare.com/client/v4/zones/{zone_id}/dns_records/{record["id"]}'
         response = requests.put(url, headers=HEADERS, json=data)
         action = "🔄 Updated"
     elif CREATE_IF_MISSING:
