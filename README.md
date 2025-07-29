@@ -148,4 +148,4 @@ You can either scan the QR code below or click the link to tip me:
 
 👉 [**buymeacoffee.com/ashfaqueali**](https://buymeacoffee.com/ashfaqueali)
 
-<img src="https://ashfaqsolangi.com/images/bmc_qr.png" alt="Buy Me a Coffee QR" width="220" height="220" />
+<img src="https://ashfaq.dev/images/bmc_qr.png" alt="Buy Me a Coffee QR" width="220" height="220" />
